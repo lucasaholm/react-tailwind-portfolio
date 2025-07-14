@@ -126,6 +126,8 @@ export const Navbar = () => {
                 {item.name}
               </button>
             ))}
+
+            <ThemeToggle />
           </div>
         </div>
       </div>
