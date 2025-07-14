@@ -1,0 +1,312 @@
+/* index.css */
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-card: hsl(var(--card));
+
+  /* FADE ANIMATION */
+  --animation-fade-in: fade-in 0.7s ease-out forwards;
+  --animation-fade-in-delay1: fade-in 0.7s ease-out 0.2s forwards;
+  --animation-fade-in-delay2: fade-in 0.7s ease-out 0.4s forwards;
+  --animation-fade-in-delay3: fade-in 0.7s ease-out 0.6s forwards;
+  --animation-fade-in-delay4: fade-in 0.7s ease-out 0.8s forwards;
+  --animation-meteor: meteor 5s linear infinite;
+
+  --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes meteor {
+    0% {
+      transform: rotate(215deg) translateX(0);
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(215deg) translateX(-500px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes glow-sun {
+    0%,
+    100% {
+      opacity: 0.95;
+      transform: scale(1);
+      filter: blur(8px);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+      filter: blur(10px);
+    }
+  }
+
+  @keyframes glow-star {
+    0%,
+    100% {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes fade-in-opacity {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@layer utilities {
+  .animate-meteor {
+    animation: meteor 5s linear infinite;
+  }
+  .animate-pulse-subtle {
+    animation: pulse-subtle 4s ease-in-out infinite;
+  }
+  .animate-glow-sun {
+    animation: glow-sun 6s ease-in-out infinite;
+  }
+  .animate-glow-star {
+    animation: glow-star 6s ease-in-out infinite;
+  }
+  .animate-fade-in {
+    animation: fade-in 0.7s ease-out forwards;
+  }
+  .animate-fade-in-delay-1 {
+    animation: fade-in 0.7s ease-out 0.2s forwards;
+  }
+  .animate-fade-in-delay-2 {
+    animation: fade-in 0.7s ease-out 0.4s forwards;
+  }
+  .animate-fade-in-delay-3 {
+    animation: fade-in 0.7s ease-out 0.6s forwards;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 210 100% 88%; /* was 92% — slightly darker */
+    --foreground: 222 47% 15%; /* was 11% — a bit more readable */
+    --card: 0 0% 98%; /* was 100% — soft white */
+    --primary: 250 47% 55%; /* slightly deeper purple */
+    --primary-foreground: 210 40% 96%; /* slightly less bright */
+    --border: 214 32% 85%; /* less bright than 91% */
+  }
+
+  .dark {
+    --background: 222 47% 4%;
+    --foreground: 213 31% 91%;
+    --card: 222 47% 8%;
+    --primary: 250 65% 65%;
+    --primary-foreground: 213 31% 91%;
+    --border: 217 33% 20%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth !important;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+}
+
+/* Utility classes */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@utility text-glow {
+  @apply relative;
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+@utility card-hover {
+  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+}
+
+@utility gradient-border {
+  @apply relative rounded-md;
+  background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+
+@utility button {
+  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)] hover:scale-105 active:scale-95;
+}
+
+@utility star {
+  @apply absolute rounded-full bg-white;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+}
+
+@utility meteor {
+  @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+/* 🌤️ Cloud animation for light mode */
+@keyframes cloud-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(140vw);
+  }
+}
+
+@keyframes pollen-float {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) translateX(50px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+.pollen-particle {
+  position: absolute;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+  animation-name: pollen-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  filter: blur(1px);
+}
+
+.animate-cloud {
+  animation-name: cloud-move;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.float-delay-0 {
+  animation-delay: 0s;
+}
+
+.float-delay-2000 {
+  animation-delay: 2s;
+}
+
+.float-delay-4000 {
+  animation-delay: 4s;
+}
+
+.float-delay-6000 {
+  animation-delay: 6s;
+}
+
+.float-delay-8000 {
+  animation-delay: 8s;
+}
+
+.float-delay-10000 {
+  animation-delay: 10s;
+}
+
+.float-delay-12000 {
+  animation-delay: 12s;
+}
+
+.cloud {
+  border-radius: 50%;
+  filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.bg-sky-gradient {
+  background: linear-gradient(to bottom, #d9ecfc, #c4e0fa, #aad3f7);
+}
