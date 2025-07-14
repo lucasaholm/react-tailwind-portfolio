@@ -127,7 +127,9 @@ export const Navbar = () => {
               </button>
             ))}
 
-            <ThemeToggle />
+            <div className="pt-4">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>
